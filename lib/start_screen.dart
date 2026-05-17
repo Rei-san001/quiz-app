@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
+
+//Stateless means it doesn't change cuz we don't need any changing data
 class StartScreen extends StatelessWidget{
-  const StartScreen({super.key});
+  const StartScreen(this.startQuiz, {super.key});
+
+  final void Function() startQuiz;
 
   @override
-  Widget build(context){
+  Widget build(context){  //context means the current state of the app
     return Center(
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.min, //MainAxisSize.min means the minimum size possible for the column
         children: [
           Image.asset(
             'assets/images/quiz-logo.png',
@@ -26,9 +30,13 @@ class StartScreen extends StatelessWidget{
 
           const SizedBox(height: 30),
 
+
+          //outlinedbutton = button with border
+          //OutlinedButton.icon = button with icon, when using this
+          //we need to use icon and label properties instead of child
           OutlinedButton.icon(
             onPressed: () {
-              //...
+              startQuiz();
             },
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.white,
