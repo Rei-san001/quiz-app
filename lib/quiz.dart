@@ -12,20 +12,25 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz>{
+  final List<String> selectedAnswers = [];
   //used Widget here to store any widget, that's why no var is used
   //activeScreen can also be nullable
   Widget? activeScreen; //we can store widget in a variable
   //? means it can be also null
 
   //another way to change the state is and in the child section that'd change too
-  /*
-  var activeScreen = 'start-screen';
+  /*  var activeScreen = 'start-screen';
   void switchScreen(){
     setState(() {
       activeScreen = 'question-screen';
     });
   }
    */
+
+
+  void chooseAnswer(String answer){
+    selectedAnswers.add(answer);
+  }
 
   //we created this just to initialize the activeScreen first
   @override
@@ -37,7 +42,9 @@ class _QuizState extends State<Quiz>{
   //created a method here
   void switchScreen(){
     setState(() {   //setState is used to update the UI
-      activeScreen = const QuestionsScreen();
+      activeScreen = QuestionsScreen(
+        onAnswerSelected: chooseAnswer,
+      );
     });
   }
 

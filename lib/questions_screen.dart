@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'answer_button.dart';
 import 'data/questions.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({
+    super.key,
+    required this.onAnswerSelected,
+
+  });
+
+  final void Function(String answer) onAnswerSelected;
 
   @override
   State<QuestionsScreen> createState() {
@@ -11,18 +18,23 @@ class QuestionsScreen extends StatefulWidget {
   }
 }
 
+
+
+
+
 class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
-  answerQuestion(){
 
+
+  void answerQuestion(String selectedAnswer){
+
+    widget.onAnswerSelected(selectedAnswer);
     setState(() {
       currentQuestionIndex++;
     });
 
   }
-
-
 
   @override
   Widget build(context) {
@@ -34,14 +46,16 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
          margin: const EdgeInsets.all(40),
          child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           crossAxisAlignment: CrossAxisAlignment.stretch,
+           mainAxisAlignment: MainAxisAlignment.center, //means center
+           crossAxisAlignment: CrossAxisAlignment.stretch, // means stretch
 
            children: [
            Text(
                currentQuestion.text,
-               style: const TextStyle(
-               color: Colors.white
+               style: GoogleFonts.jetBrainsMono(
+                 color: const Color.fromARGB(255, 173, 198, 218),
+                 fontSize: 24,
+                 fontWeight: FontWeight.bold,
                ),
                textAlign: TextAlign.center,
            ),
@@ -52,7 +66,12 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
              //... simply means it will take all the values from the list and put it in the column
              //map allows us to convert, to transform, u could say, the values in a list to other values
              ...currentQuestion.getShuffledAnswers().map((answer){
-               return AnswerButton(answerText: answer, onSelected: answerQuestion);
+               return AnswerButton(
+                   answerText: answer,
+                   onSelected: (){
+                     answerQuestion(answer);
+                   },
+               );
              })
          ],
          ),

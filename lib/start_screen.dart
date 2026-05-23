@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 //Stateless means it doesn't change cuz we don't need any changing data
 class StartScreen extends StatelessWidget{
@@ -22,7 +22,7 @@ class StartScreen extends StatelessWidget{
           const SizedBox(height: 80),
 
           Text('Learn Flutter in a fun way',
-            style: TextStyle(
+            style: GoogleFonts.jetBrainsMono(
               color: Colors.white,
               fontSize: 24,
             ),
