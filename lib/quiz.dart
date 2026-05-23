@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/questions_screen.dart';
 import 'package:quiz_app/start_screen.dart';
+import 'data/questions.dart';
+import 'result_screen.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -12,7 +14,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz>{
-  final List<String> selectedAnswers = [];
+  List<String> selectedAnswers = [];
   //used Widget here to store any widget, that's why no var is used
   //activeScreen can also be nullable
   Widget? activeScreen; //we can store widget in a variable
@@ -30,6 +32,13 @@ class _QuizState extends State<Quiz>{
 
   void chooseAnswer(String answer){
     selectedAnswers.add(answer);
+
+    if(selectedAnswers.length == questions.length){
+       setState(() {
+         selectedAnswers = [];
+         activeScreen = ResultScreen();
+       });
+    }
   }
 
   //we created this just to initialize the activeScreen first
