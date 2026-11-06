@@ -12,7 +12,7 @@ class AnswerButton extends StatelessWidget{
       Flutter uses it to prevent mistakes
       */
 
-  //properties
+  //properties for the answer button
   final String answerText;
   final void Function() onSelected;
 
